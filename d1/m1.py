@@ -11,6 +11,6 @@ a.sort()
 b.sort()
 
 for i, na in enumerate(a):
-    sum += abs( na - b[i])
+    sum += abs(na - b[i])
 
 print(sum)
