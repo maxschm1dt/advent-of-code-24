@@ -1,17 +1,13 @@
-f = []
-a = set()
-b = []
-
-n_as_in_b = []
+a, b  = [], []
+sum = 0
 
 with open("d1/d1") as file:
-    f = file.readlines()
-
-for l in f:
-    a.add(int(l.split('   ')[0]))
-    b.append(int (l.split('   ')[1][:-1]))
+    for line in file:
+        left, right = line.split('   ')
+        a.append(int(left))
+        b.append(int(right))
 
 for na in a:
-    n_as_in_b.append(b.count(na) * na)
+    sum += b.count(na) * na
 
-print(sum(n_as_in_b))
+print(sum)

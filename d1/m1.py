@@ -1,19 +1,16 @@
-f = []
-a = []
-b = []
-d = []
+a, b, d = [], [], []
+sum = 0
 
 with open("d1/d1") as file:
-    f = file.readlines()
-
-for l in f:
-    a.append(int(l.split('   ')[0]))
-    b.append(int (l.split('   ')[1][:-1]))
-
+    for line in file:
+        left, right = line.split('   ')
+        a.append(int(left))
+        b.append(int(right))
+    
 a.sort()
 b.sort()
 
 for i, na in enumerate(a):
-    d.append(abs( na - b[i]))
+    sum += abs( na - b[i])
 
-print(sum(d))
+print(sum)
