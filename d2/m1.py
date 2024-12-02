@@ -1,15 +1,22 @@
 ls = []
-n_safe = 0
+first_degree_safe = 0
+second_degree_safe = 0
+
+def is_safe(l: list) -> bool:
+    diffs = [x - l[i + 1] for i, x in enumerate(l[:-1])]
+    abs_diffs = [abs(x) for x in diffs]
+    is_in_bounds = max(abs_diffs) <= 3 and min(abs_diffs) > 0
+    is_monotone = all(x > 0 for x in diffs) or all(x < 0 for x in diffs)
+
+    return is_in_bounds and is_monotone
 
 with open("d2/d2") as file:
     for line in file:
-        levels = [int(x) for x in line.split(' ')]
-        ls.append([levels[i + 1] - x for i, x in enumerate(levels[:-1])])
+        ls.append([int(x) for x in line.split()])
 
-for l in ls:
-    abs_diffs = [abs(x) for x in l]
-    is_in_bounds = max(abs_diffs) <= 3 and min(abs_diffs) > 0
-    is_monotone = all([x >0 for x in l]) or all(x < 0 for x in l)
-    n_safe += 1 if is_in_bounds and is_monotone else 0 
+for i, l in enumerate(ls):
+    first_degree_safe += 1 if is_safe(l) else 0
+    second_degree_safe += 1 if any(is_safe(x) for x in [l[:i] + l[i+1:] for i in range(len(l))]) else 0
 
-print(n_safe)
+print("star1: ", first_degree_safe)
+print("star2: ",second_degree_safe)
