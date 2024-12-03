@@ -1,6 +1,4 @@
-ls = []
-first_degree_safe = 0
-second_degree_safe = 0
+first_degree_safe, second_degree_safe, ls = 0, 0, []
 
 def is_safe(l: list) -> bool:
     diffs = [x - l[i + 1] for i, x in enumerate(l[:-1])]
